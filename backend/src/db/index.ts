@@ -1,4 +1,4 @@
-import { drizzle } from "drizzle-orm/better-sqlite3";
+import { drizzle } from "drizzle-orm/node-postgres";
 import { ENV } from "../config/env";
 import { Pool } from "pg";
 import * as schema from "./schema"
