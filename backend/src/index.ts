@@ -3,7 +3,7 @@ import cors from "cors";
 
 
 import { ENV } from "./config/env";
-import { clerkMiddleware } from '@clerk/express'
+import { clerkMiddleware } from "@clerk/express";
 
 const app = express();
 
