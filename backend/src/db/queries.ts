@@ -25,15 +25,27 @@ export const getUserById = async (id:string) => {
 // Update User
 export const updateUser = async (id:string, data: Partial<NewUser>) => {
   const [user] = await db.update(users).set(data).where(eq(users.id, id)).returning();
+  if(!user) {
+    throw new Error(`User with id ${id} not found!`);
+  }
   return user;
 };
 
 // Upsert User => Create or Update User
 export const upsertUser = async (data:NewUser) => {
-  const existingUser = await getUserById(data.id);
-  if(existingUser) return updateUser(data.id, data);
-  return createUser(data);
+  // const existingUser = await getUserById(data.id);
+  // if(existingUser) return updateUser(data.id, data);
+  // return createUser(data);
+
+  const [user] = await db.insert(users).values(data)
+  .onConflictDoUpdate({
+    target: users.id,
+    set: data,
+  })
+  .returning();
+  return user;
 };
+
 
 // PRODUCT QUERIES ------------------------------------------------------
 
@@ -75,8 +87,18 @@ export const getProductByUserId = async (userId:string) => {
 };
 
 // Update Product
-export const updateProduct = async (id: string, data: Partial<NewProduct>) => {
-  const [product] = await db.update(products).set(data).where(eq(products.id, id)).returning();
+export const updateProduct = async ( id: string, data: Partial<NewProduct> ) => {
+  const [product] = await db.update(products).set({
+      ...data,
+      updatedAt: new Date(),
+    })
+    .where(eq(products.id, id))
+    .returning();
+
+  if (!product) {
+    throw new Error(`Product with id ${id} not found`);
+  }
+
   return product;
 };
 
