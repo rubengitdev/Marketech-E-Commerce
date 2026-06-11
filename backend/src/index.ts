@@ -20,7 +20,7 @@ app.get(`/`, (req,res) => {
     message: "Welcome to Marketech powered by PostgreSQL, Drizzle-ORM, and Clerk Auth",
     endpoints: {
       users: "/api/users",
-      product: "/api/product",
+      products: "/api/products",
       comments: "/api/comments",
     },
   });

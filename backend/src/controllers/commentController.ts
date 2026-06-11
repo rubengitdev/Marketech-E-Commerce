@@ -9,7 +9,7 @@ interface CommentParams {
 export const getAllComments = async(req:Request<CommentParams>,res:Response) => {
   try {
     const {id} = req.params;
-    const comments = await queries.getCommentById;
+    const comments = await queries.getCommentById(id);
     if (!comments) return res.status(404).json({ error: "Comments not found"});
 
     res.status(200).json(comments);
@@ -27,7 +27,9 @@ export const createComment = async(req:Request,res:Response) => {
     if(!userId) return res.status(401).json({ error: "User Unauthorized" });
     
     // parsing productId and content from request body
-    const { productId } = req.body;
+    const productId = String(req.params.productId ?? "");
+    if (!productId) return res.status(400).json({ error: "Product id is required" });
+    
     const { content } = req.body;
     if(!content) return res.status(400).json({ error: "Comment content is required!"});
 
@@ -50,7 +52,8 @@ export const deleteComment = async (req:Request,res:Response) => {
     const { userId } = getAuth(req)
     if(!userId) return res.status(401).json({ error: "User Unauthorized" });
 
-    const commentId = String(req.params.id)
+    const commentId = String(req.params.commentId ?? "")
+    if (!commentId) return res.status(400).json({ error: "Comment id is required" });
     
     // Check if comment exist
     const existingComment = await queries.getCommentById(commentId);

@@ -20,6 +20,6 @@ router.post("/", requireAuth(), productController.createProduct);
 router.put("/:id", requireAuth(), productController.updateProduct)
 
 // DELETE /api/products/:id => Delete product (protected - owner only)
-router.delete("/:id", requireAuth, productController.deleteProduct);
+router.delete("/:id", requireAuth(), productController.deleteProduct);
 
 export default router;
