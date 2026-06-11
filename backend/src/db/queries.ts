@@ -35,7 +35,7 @@ export const upsertUser = async (data:NewUser) => {
   return createUser(data);
 };
 
-// PRODUCT QUERIES ------------------------------------------------------
+// PRODUCT QUERIES --------------------------------------------------------
 
 // Create Product
 export const createProduct = async (data:NewProduct) => {
@@ -107,5 +107,3 @@ export const deleteComment = async (id: string) => {
   const [comment] = await db.delete(comments).where(eq(comments.id, id)).returning();
   return comment;
 };
-
-
