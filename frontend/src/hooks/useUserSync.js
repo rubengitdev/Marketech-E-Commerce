@@ -19,15 +19,36 @@ function useUserSync() {
     mutationFn: syncUser,
   });
 
+  const email = user?.primaryEmailAddress?.emailAddress;
+  const name = user?.fullName || user?.firstName;
+  const imageUrl = user?.imageUrl;
+
   useEffect(() => {
-    if (isSignedIn && user && !isPending && !isSuccess) {
+    if (
+      isSignedIn &&
+      user &&
+      email &&
+      name &&
+      imageUrl &&
+      !isPending &&
+      !isSuccess
+    ) {
       syncUserMutation({
-        email: user.primaryEmailAddress?.emailAddress,
-        name: user.fullName || user.firstName,
-        imageUrl: user.imageUrl,
+        email,
+        name,
+        imageUrl,
       });
     }
-  }, [isSignedIn, user, syncUserMutation, isPending, isSuccess]);
+  }, [
+    isSignedIn,
+    user,
+    email,
+    name,
+    imageUrl,
+    syncUserMutation,
+    isPending,
+    isSuccess,
+  ]);
 
   return { isSynced: isSuccess };
 }

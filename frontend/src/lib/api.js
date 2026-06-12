@@ -16,7 +16,7 @@ export const getAllProducts = async () => {
 
 // GET Single Product by ID
 export const getProductById = async (id) => {
-  const { data } = await api.get(`/product/${id}`);
+  const { data } = await api.get(`/products/${id}`);
   return data;
 };
 
@@ -34,26 +34,26 @@ export const createProduct = async (productData) => {
 
 // UPDATE Product
 export const updateProduct = async (id, productData) => {
-  const { data } = await api.put(`/product/${id}`, productData);
+  const { data } = await api.put(`/products/${id}`, productData);
   return data;
 };
 
 export const deleteProduct = async (id) => {
-  const { data } = await api.delete(`/product/${id}`);
+  const { data } = await api.delete(`/products/${id}`);
   return data;
 };
 
 // COMMENTS API
 
 // GET All Comments
-export const getAllComments = async (productId, content) => {
-  const { data } = await api.get(`/comments/${productId}`, content);
+export const getAllComments = async (productId) => {
+  const { data } = await api.get(`/comments/${productId}`);
   return data;
 };
 
 // CREATE Comments to a product
 export const createComment = async (productId, content) => {
-  const { data } = await api.post(`/comments/${productId}`, content);
+  const { data } = await api.post(`/comments/${productId}`, { content });
   return data;
 };
 

@@ -31,6 +31,6 @@ app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/comments", commentRoutes);
 
-app.listen(3000, () =>
+app.listen(ENV.PORT, () =>
   console.log("Server is up and running on PORT:", ENV.PORT),
 );
