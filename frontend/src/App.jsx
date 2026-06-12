@@ -1,4 +1,4 @@
-import { SignedIn, SignedOut, SignInButton, SignOutButton } from "@clerk/react";
+// import { SignedIn, SignedOut, SignInButton, SignOutButton } from "@clerk/react";
 import Navbar from "./components/Navbar";
 import { Navigate, Route, Routes } from "react-router";
 import HomePage from "./pages/HomePage";
