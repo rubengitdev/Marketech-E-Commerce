@@ -7,7 +7,7 @@ function Navbar() {
   const { isSignedIn } = useAuth();
   return (
     <div className="navbar bg-base-300">
-      <div className="max-w-7xl mx-auto w-full px-4 flex justify-between items-center">
+      <div className="max-w-5xl mx-auto w-full px-4 flex justify-between items-center">
         {/* LOGO - Left Side */}
         <div className="flex-1">
           <Link to="/" className="btn btn-ghost gap-2">
