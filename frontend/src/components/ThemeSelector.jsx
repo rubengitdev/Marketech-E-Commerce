@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { PaletteIcon } from "lucide-react";
 
 const THEMES = ["light", "dark"];
+const DEFAULT_THEME = "dark";
 
 function ThemeSelector() {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== "undefined") {
-      return localStorage.getItem("theme") || "dark";
+      const storedTheme = localStorage.getItem("theme");
+      return THEMES.includes(storedTheme) ? storedTheme : DEFAULT_THEME;
     }
-    return "dark";
+    return DEFAULT_THEME;
   });
 
   useEffect(() => {
@@ -18,8 +20,13 @@ function ThemeSelector() {
 
   return (
     <div className="dropdown dropdown-end">
-      <div tabIndex={0} role="button" className="btn btn-ghost btn-sm gap-1">
-        <PaletteIcon className="size-4" />
+      <div
+        tabIndex={0}
+        role="button"
+        aria-label="Select theme"
+        className="btn btn-ghost btn-sm gap-1"
+      >
+        <PaletteIcon className="size-4" aria-hidden="true" />
         <span className="hidden sm:inline">Theme</span>
       </div>
       <ul
